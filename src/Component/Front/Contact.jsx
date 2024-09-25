@@ -1,7 +1,7 @@
 const Contact = () => {
     return (
         <>
-            <div className="col-lg-6 py-5">
+            <div className="col-lg-6 py-5" id="contact">
                 <div className="bg-white p-5 my-5">
                     <h3 className="text-center mb-4">CONTACTEZ-NOUS</h3>
                     <form>

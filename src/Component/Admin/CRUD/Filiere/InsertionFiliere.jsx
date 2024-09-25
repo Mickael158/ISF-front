@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const InsertionFiliere = () => {
     const [NomFiliere,setNomFiliere] = useState('');
@@ -16,17 +18,19 @@ const InsertionFiliere = () => {
                     }
                 },
             );
-            console.log('Inserer',response.data);
+            toast.success("Filiere inserer!");
             setNomFiliere('');
             setCodeFiliere('');
         }catch(error)
         {
             console.error('Erreur d\'insertion' , error)
+            toast.error("Erreur d'insertion");
         }
 
     }
     return (
         <>
+            <ToastContainer />
             <div className="w-100 mt-2 mb-2">
                 <div className="row">
                     <form method="post" onSubmit={insertion}>

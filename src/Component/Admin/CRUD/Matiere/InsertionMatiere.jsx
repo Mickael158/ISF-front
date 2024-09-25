@@ -1,5 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const InsertionMatiere = () => {
     const [NomMatiere,setNomMatiere] = useState('');
@@ -7,8 +9,8 @@ const InsertionMatiere = () => {
     const insertion = (e) => {
         e.preventDefault();
         try{
-            const response = axios.post('http://localhost:8080/Formation/insertionFormation',
-                { nom_formation:NomFormation },
+            const response = axios.post('http://localhost:8080/Matiere/insertionMatiere',
+                { nom_matiere:NomMatiere, coeff:Coeff },
                 {
                     headers:
                         {
@@ -17,25 +19,29 @@ const InsertionMatiere = () => {
                 },
             );
             console.log('Inserer',response.data);
-            setNomFormation('');
+            toast.success("Matiere ajouter!");
+            setNomMatiere('');
+            setCoeff('');
         }catch(error)
         {
             console.error('Erreur d\'insertion' , error)
+            toast.error("Erreur d'ajout de la Matiere");
         }
 
     }
     return (
         <>
+            <ToastContainer />
             <div className="w-100 mt-2 mb-2">
                 <div className="row">
                     <form method="post" onSubmit={insertion}>
                         <div className="d-flex">
                             <div className="col-md-6">
-                                <input type="text" className="form-control" value={NomFormation} onChange={(e) => setNomFormation(e.target.value)} placeholder="Nom de la Formation" style={{'height':'50px'}}/>
+                                <input type="text" className="form-control" value={NomMatiere} onChange={(e) => setNomMatiere(e.target.value)} placeholder="Matiere" style={{'height':'50px'}}/>
                             </div>
-                            {/* <div className="col-md-6">
-                            <input type="text" className="form-control" value={NomFormation} onChange={(e) => setNomFormation(e.target.value)} placeholder="Code Filiere" style={{'height':'50px'}}/>
-                        </div> */}
+                            <div className="col-md-6">
+                                <input type="number" className="form-control" value={Coeff} onChange={(e) => setCoeff(e.target.value)} placeholder="Coefficient" style={{'height':'50px'}}/>
+                            </div>
                         </div>
                         <div className="col-md-4">
                             <button type="submit" className="btn btn-success">Enregistrer</button>

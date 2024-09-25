@@ -1,12 +1,14 @@
 import { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const InsertionFormation = () => {
     const [NomFormation,setNomFormation] = useState('');
-    const insertion = (e) => {
+    const insertion = async (e) => {
         e.preventDefault();
         try{
-            const response = axios.post('http://localhost:8080/Formation/insertionFormation',
+            const response = await axios.post('http://localhost:8080/Formation/insertionFormation',
                 { nom_formation:NomFormation },
                 {
                     headers:
@@ -15,17 +17,21 @@ const InsertionFormation = () => {
                     }
                 },
             );
+            toast.success("Inserer avec success!");
             console.log('Inserer',response.data);
             setNomFormation('');
         }catch(error)
         {
+            toast.error("Erreur dans l'insertion d'une Formation");
             console.error('Erreur d\'insertion' , error)
         }
 
     }
     return (
         <>
+
             <div className="w-100 mt-2 mb-2">
+                <ToastContainer />
                 <div className="row">
                     <form method="post" onSubmit={insertion}>
                         <div className="d-flex">

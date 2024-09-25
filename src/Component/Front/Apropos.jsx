@@ -1,11 +1,11 @@
 const Apropos = () => {
     return (
-        <div className="container-fluid bg-image" style={{"margin": "10px 0 90px 0"}}>
+        <div className="container-fluid bg-image" style={{"margin": "10px 0 90px 0"}} id="apropos">
         <div className="container">
             <div className="row">
                 <div className="col-lg-7 my-5 pb-lg-5">
                     <div className="section-title position-relative mb-4">
-                        <h1 className="display-6">APROPOS</h1>
+                        <h1 className="display-6">APROPOS</h1> 
                     </div>
                     <h6 className="mb-4 pb-2 font-weight-bold">L IS-INFO est une Institut dans la formation des jeunes dans le domaine de l Informatique, a ce jours elle a dejas 20 ans d experience dans ce domaine avec des professeurs qualifiers et aussi une exemple de methode de travail pour les Etudiants.</h6>
                     <div className="d-flex align-items-center mb-2">
@@ -36,7 +36,7 @@ const Apropos = () => {
                 </div>
                 <div className="col-lg-5" style={{"minHeight": "500px"}}>
                     <div className="position-relative h-100">
-                        <img className="position-absolute w-100 h-100" src="public/acceuil/img/feature.jpg" style={{"objectFit": "cover"}}/>
+                        <img className="position-absolute w-100 h-100" src="/Image/Logo.jpg" style={{"objectFit": "cover"}}/>
                     </div>
                 </div>
             </div>

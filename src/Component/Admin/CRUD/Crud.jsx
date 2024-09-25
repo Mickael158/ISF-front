@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import Modal from "../Modal/Modal";
 import Formation from "./Formation/Formation";
-import Institut from "./Institut/Institut";
 import Filiere from "./Filiere/Filiere";
 import Promotion from "./Promotion/Promotion";
 import PrixEcolage from "./PrixEcolage/PrixEcolage";
 import Cours from "./Cours/Cours.jsx";
+import Matiere from "./Matiere/Matiere.jsx";
 
 const Crud = () => {
   const [showModal, setShowModal] = useState(false);
@@ -31,16 +31,10 @@ const Crud = () => {
 
   return (
     <>
-      <div>
+      <div className="container">
         <h3 className="text-center mt-3 mb-3">
           VOUS POUVEZ FAIRE ICI TOUS LES SIMPLES OPERATIONS
         </h3>
-        <button
-          onClick={() => openModal({ titre: 'INSTITUT', content: <Institut /> })}
-          className="btn btn-info"
-        >
-          INSTITUT
-        </button>
         <button
           onClick={() => openModal({ titre: 'FORMATION', content: <Formation /> })}
           className="btn btn-info"
@@ -48,16 +42,16 @@ const Crud = () => {
           FORMATION
         </button>
         <button
-          onClick={() => openModal({ titre: 'PROMOTION', content: <Promotion /> })}
-          className="btn btn-info"
-        >
-          PROMOTION
-        </button>
-        <button
           onClick={() => openModal({ titre: 'FILIERE', content: <Filiere /> })}
           className="btn btn-info"
         >
           FILIERE
+        </button>
+        <button
+          onClick={() => openModal({ titre: 'PROMOTION', content: <Promotion /> })}
+          className="btn btn-info"
+        >
+          PROMOTION
         </button>
         <button
           onClick={() => openModal({ titre: 'Prix Ecolage', content: <PrixEcolage /> })}
@@ -70,6 +64,12 @@ const Crud = () => {
             className="btn btn-info"
         >
           Cours Promotion
+        </button>
+        <button
+            onClick={() => openModal({ titre: 'Matiere', content: <Matiere /> })}
+            className="btn btn-info"
+        >
+          Matiere
         </button>
         <Modal showModal={showModal} onClose={closeModal} title={Title}>
           {ContentModal}

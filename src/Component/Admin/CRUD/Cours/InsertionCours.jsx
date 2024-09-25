@@ -2,6 +2,8 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import ListeFormation from "../Formation/ListeFormation.jsx";
 import ListePromotion from "../Promotion/ListePromotion.jsx";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const InsertionCours = () => {
     const [datedebut,setDatedebut] = useState('');
@@ -12,7 +14,7 @@ const InsertionCours = () => {
             const response = await axios.get('http://localhost:8080/Promotion/selectAll_Promotion');
             setListePromotion(response.data.data);
         }catch (error){
-            console.log('ERREUR DE RECUPERATION',error)
+            console.log('ERREUR DE RECUPERATION',error);
         }
     };
     const insertion = (e) => {
@@ -30,9 +32,11 @@ const InsertionCours = () => {
             );
             console.log('Inserer',response.data);
             setDatedebut('');
+            toast.success("Cours de la promotion ajouter!")
         }catch(error)
         {
             console.error('Erreur d\'insertion' , error)
+            toast.error("erreur de l'attribution des cours!")
         }
 
     }
@@ -41,6 +45,7 @@ const InsertionCours = () => {
     },[])
     return (
         <>
+            <ToastContainer />
             <div className="w-100 mt-2 mb-2">
                 <div className="row">
                     <form method="post" onSubmit={insertion}>

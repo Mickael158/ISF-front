@@ -1,16 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const InsertionEtudiant = () => {
     const [Nom,setNom] = useState('');
     const [Prenom,setPrenom] = useState('');
     const [Telephone,setTelephone] = useState('');
+    const [Email,setEmail] = useState('');
+    const [Adresse,setAdresse] = useState('');
     const [Matricule,setMatricule] = useState('');
+    const [Genre,setGenre] = useState('');
+    const [IdGenre,setIdGenre] = useState('');
+    const [IdPromotion,setIdPromotion] = useState('');
+    const [Promotion,setPromotion] = useState('');
     const insertion = (e) => {
         e.preventDefault();
         try{
+            console.log(IdPromotion,IdGenre,Matricule,Telephone,Prenom,Nom);
             const response = axios.post('http://localhost:8080/Etudiant/insertionEtudiant',
-                { nom:Nom, prenom:Prenom, telephone:Telephone, matricule:Matricule, promotion_id:"1",genre_id:"1" },
+                { nom:Nom, prenom:Prenom, telephone:Telephone, matricule:Matricule, promotion_id:IdPromotion,id_genre:IdGenre,adresse:Adresse,email:Email },
                 {
                     headers:
                     {
@@ -19,19 +28,47 @@ const InsertionEtudiant = () => {
                 },
             );
             console.log('Inserer',response.data);
+            toast.success("Etudiant inscrit avec success!");
             setNom('');
             setPrenom('');
+            setAdresse('');
+            setEmail('');
             setTelephone('');
             setMatricule('');
         }catch(error)
         {
-            console.error('Erreur d\'insertion' , error)
+            console.error('Erreur d\'insertion' , error);
+            toast.error("erreur d'insertion de l'etudiant!");
         }
 
     }
+    const ListeGenre = async () => {
+        try {
+            const response = await axios.get("http://localhost:8080/Genre/SelectAll_Genre");
+            setGenre(response.data.data);
+        } catch (error) {
+            console.log("erreur de recuperation "+error);
+        }
+    }
+
+    const ListePromotion = async () => {
+        try {
+            const response = await axios.get("http://localhost:8080/Promotion/selectAll_Promotion");
+            setPromotion(response.data.data);
+        } catch (error) {
+            console.log("erreur de recuperation "+error);
+        }
+    }
+
+    useEffect(() => {
+        ListeGenre();
+        ListePromotion();
+    },[])
     return (
         <>
+            <ToastContainer />
             <div className="w-100 mt-2 mb-2">
+                <h4 className="text-center mb-4">Ajouter un etudiant !</h4>
                 <div className="row">
                     <form method="post" onSubmit={insertion}>
                         <div className="h-100 d-flex flex-column gap-3">
@@ -53,29 +90,46 @@ const InsertionEtudiant = () => {
                             </div>
                             <div className="d-flex justify-content-between">
                                 <div className="col-md-6">
-                                    <select name="" id="" className="form-control" style={{'height':'50px'}}>
-                                        <option value="">Promotion</option>
-                                    </select>
+                                    <input type="text" className="form-control" value={Adresse} onChange={(e) => setAdresse(e.target.value)} placeholder="Adresse Etudiant" style={{'height':'50px'}}/>
                                 </div>
                                 <div className="col-md-6">
-                                    <select name="" id="" className="form-control" style={{'height':'50px'}}>
-                                        <option value="">Formation</option>
-                                    </select>
+                                    <input type="email" className="form-control" value={Email} onChange={(e) => setEmail(e.target.value)} placeholder="Email Etudiant" style={{'height':'50px'}}/>
                                 </div>
                             </div>
                             <div className="d-flex justify-content-between">
                                 <div className="col-md-6">
-                                    <input type="text" className="form-control" placeholder="Adresse Etudiant" style={{'height':'50px'}}/>
+                                    <select name="" id="" className="form-control" style={{'height':'50px'}} value={IdPromotion} onChange={(e) => setIdPromotion(e.target.value)}>
+                                    {Array.isArray(Promotion) ? (
+                                        Promotion.map((P) => (
+                                            <option className="form-control" key={P.id_promotion} value={P.id_promotion}>
+                                                {P.codep}
+                                            </option>
+                                        ))
+                                    ) : (
+                                        <option className="form-control">Null</option>
+                                    )}
+                                    </select>
                                 </div>
                                 <div className="col-md-6">
-                                    <select name="" id="" className="form-control" style={{'height':'50px'}}>
-                                        <option value="">Genre</option>
+                                    <select name="" id="" className="form-control" style={{'height':'50px'}} value={IdGenre} onChange={(e) => setIdGenre(e.target.value)}>
+                                    {Array.isArray(Genre) ? (
+                                        Genre.map((G) => (
+                                            <option className="form-control" key={G.id_genre} value={G.id_genre}>
+                                                {G.nom}
+                                            </option>
+                                        ))
+                                    ) : (
+                                        <option className="form-control">Null</option>
+                                    )}
                                     </select>
                                 </div>
                             </div>
-                        </div>
-                        <div className="col-md-4">
-                            <button type="submit" className="btn btn-success">Enregistrer</button>
+                            <div className="d-flex justify-content-between">
+                                
+                                <div className="col-md-4">
+                                    <button type="submit" className="btn btn-success">Enregistrer</button>
+                                </div>
+                            </div>
                         </div>
                     </form>
                 </div>

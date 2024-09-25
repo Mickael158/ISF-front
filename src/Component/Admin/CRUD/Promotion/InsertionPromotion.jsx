@@ -1,5 +1,7 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const InsertionPromotion = () => {
     const [CodePromotion,setCodePromotion] = useState('');
@@ -20,11 +22,12 @@ const InsertionPromotion = () => {
                     }
                 },
             );
-            console.log('Inserer',response.data);
+            toast.success("Promotion inserer");
             setCodePromotion('');
             setAnnePromotion('');
         }catch(error)
         {
+            toast.error("Erreur d'insertion");
             console.error('Erreur d\'insertion' , error)
         }
 
@@ -51,6 +54,7 @@ const InsertionPromotion = () => {
     },[]);
     return (
         <>
+            <ToastContainer />
             <div className="w-100 mt-2 mb-2">
                 <div className="row">
                     <form method="post" onSubmit={insertion}>
@@ -59,12 +63,12 @@ const InsertionPromotion = () => {
                                 <input type="text" className="form-control" value={CodePromotion} onChange={(e) => setCodePromotion(e.target.value)} placeholder="Nom de la Promotion" style={{'height':'50px'}}/>
                             </div>
                             <div className="col-md-6">
-                                <input type="month" className="form-control" value={AnnePromotion} onChange={(e) => setAnnePromotion(e.target.value)} placeholder="Anne Promotion" style={{'height':'50px'}}/>
+                                <input type="date" className="form-control" value={AnnePromotion} onChange={(e) => setAnnePromotion(e.target.value)} placeholder="Anne Promotion" style={{'height':'50px'}}/>
                             </div>
                         </div>
                         <div className="d-flex mt-3">
                             <div className="col-md-6">
-                                <select name="" id="" className="form-control" value={IdFiliere} onChange={(e)=> setIdFiliere(e.target.value)}>
+                                <select name="" id="" className="form-control" value={IdFiliere} onChange={(e)=> setIdFiliere(e.target.value)} style={{'height':'50px'}}>
                                     {Array.isArray(Filiere) ? (
                                         Filiere.map((f) => (
                                             <option className="form-control" key={f.id_filiere} value={f.id_filiere}>
@@ -77,7 +81,7 @@ const InsertionPromotion = () => {
                                 </select>
                             </div>
                             <div className="col-md-6">
-                                <select name="" id="" className="form-control" value={IdFormation} onChange={(e)=> setIdFormation(e.target.value)}>
+                                <select name="" id="" className="form-control" value={IdFormation} onChange={(e)=> setIdFormation(e.target.value)} style={{'height':'50px'}}>
                                     {Array.isArray(Formation) ? (
                                         Formation.map((f) => (
                                             <option className="form-control" key={f.id_formation} value={f.id_formation}>

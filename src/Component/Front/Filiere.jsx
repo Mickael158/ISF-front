@@ -1,7 +1,7 @@
 const Filiere = () => {
     return (
         <>
-        <div className="container-fluid">
+        <div className="container-fluid" id="filiere">
         <div className="row mx-0 justify-content-center pb-4    ">
             <div className="col-lg-6">
                 <div className="section-title text-center position-relative mb-4">
@@ -14,8 +14,12 @@ const Filiere = () => {
     <div className="container-fluid">
         <div className="row d-flex justify-content-center align-items-center">
             <div className="col-lg-6">
-                <div className="section-title text-center position-relative mb-4">
-                    <h6 className="w-75 text-center m-auto border shadow text-align-center align-content-center font-weight-bold" style={{"height": "170px !important", "textDecoration": "none !important","textTransform": "none !important","listStyle": "none !important" }}>Vous aurez deux filieres aux choix pour l obtention du diplome de Licence</h6>
+                <div className="card m-auto shadow d-flex align-items-center justify-content-center text-center bg-white text-white licence" style={{"width": "90%","height": "170px"}}>
+                    <div className="card-body d-flex align-items-center justify-content-center text-center" style={{"columnGap": "30px !important"}}>
+                      <div style={{"display": "flex","flexDirection": "column","rowGap": "5px"}}>
+                        <h6 className="card-subtitle mb-2 font-weight-bold text-muted">Vous aurez deux filieres aux choix pour l obtention du diplome de Licence</h6>
+                      </div>
+                    </div>
                 </div>
             </div>
             <div className="col-lg-6 d-flex flex-column" style={{"rowGap": "20px"}}>
@@ -60,8 +64,12 @@ const Filiere = () => {
                 </div>
             </div>
             <div className="col-lg-6">
-                <div className="section-title text-center position-relative mb-4">
-                    <h6 className="w-75 text-center m-auto border shadow text-align-center align-content-center font-weight-bold" style={{"height": "170px !important"}}>Vous aurez deux filieres aux choix pour l obtention du diplome de Master</h6>
+                <div className="card m-auto shadow d-flex align-items-center justify-content-center text-center bg-white text-white licence" style={{"width": "90%","height": "170px"}}>
+                    <div className="card-body d-flex align-items-center justify-content-center text-center" style={{"columnGap": "30px !important"}}>
+                      <div style={{"display": "flex","flexDirection": "column","rowGap": "5px"}}>
+                        <h6 className="card-subtitle mb-2 font-weight-bold text-muted">Vous aurez deux filieres aux choix pour l obtention du diplome de Master</h6>
+                      </div>
+                    </div>
                 </div>
             </div>
         </div>

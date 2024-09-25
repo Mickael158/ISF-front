@@ -1,7 +1,7 @@
 const Diplome = () => {
     return (
         <>
-            <div className="row mx-0 justify-content-center pt-5">
+            <div className="row mx-0 justify-content-center pt-5" id="diplome">
             <div className="col-lg-6">
                 <div className="section-title text-center position-relative mb-4">
                     <h1 className="display-5 mb-1">DIPLOME DELIVRE</h1>

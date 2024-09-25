@@ -1,37 +1,64 @@
 import { useEffect, useState } from "react";
+import axios from 'axios';
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const ListeFormation = () => {
-    // const [Formation,setFormation] = useState('');
-    // const fetch = () => {
-    //     axios.get('https://localhost:8080/api/Formation').then(response => {
-    //         setFormation(response.data);
-    //     });
-    // };
-    // useEffect(() => {
-    //     fetch();
-    // },[]);
+    const [Formation,setFormation] = useState('');
+    const fetch = async () => {
+        try{
+            const response = await axios.get('http://localhost:8080/Formation/selectAll_Formation');
+
+            setFormation(response.data.data);
+        }catch(error){
+            toast.error("Recuperation des donnee echouer!");
+            console.log("Erreur de recuperation",error);
+        }
+    };
+    const suppressionFormation = async (event,id) => {
+        event.preventDefault();
+        try{
+            const response = await axios.post('http://localhost:8080/Formation/Delete_Formation',{id_formation:id},
+                {
+                    headers:
+                        {
+                            'content-type': 'application/json'
+                        }
+                },
+            );
+            fetch();
+            toast.success("Formation Supprimer!");
+        }catch(error){
+            toast.error("Erreur de suppresion de la formation!");
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        fetch();
+    },[]);
     return (
         <>
+            <ToastContainer />
             <table className="table table-bordered">
                 <thead>
-                    <tr>
+                    <tr className="text-center">
                         <th>Formation</th>
                         <th>Supprimer</th>
                     </tr>
                 </thead>
                 <tbody>
-                {/* {Array.isArray(fetch) ? (
-                            fetch.map(Formation => (
-                                <tr key={Formation.id}>
-                                        <td>
-                                            {Formation.nomFormation}
-                                        </td>
-                                        <td>
-                                            <button className="btn btn-danger btn-block" style={{'width': '50%'}} onClick={(e) => SuppressionRole(e, rolees.id)}>Supprimer</button>
-                                        </td>
-                                </tr>
-                            ) )
-                        ) : ( <tr><td>Null</td></tr>) } */}
+                   {Array.isArray(Formation) ? (
+                       Formation.map( F => (
+                           <tr key={F.id_formation} className="text-center">
+                               <td>
+                                   {F.nom_formation}
+                               </td>
+                               <td className="d-flex justify-content-center align-items-center">
+                                   <button className="btn btn-danger btn-block d-flex align-items-center justify-content-center" style={{'width': '50px'}} onClick={(event) => suppressionFormation(event, F.id_formation)} ><i className="now-ui-icons shopping_basket"></i></button>
+                               </td>
+                           </tr>
+                       ) )
+                   ) : ( <tr><td>Null</td></tr>) }
                 </tbody>
             </table>
         </>
