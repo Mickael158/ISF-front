@@ -5,9 +5,14 @@ import axios from 'axios';
 
 const ListePromotion = () => {
     const [Promotion,setPromotion] = useState('');
+    const token = localStorage.getItem("token");
     const fetch = async () => {
         try{
-            const response = await axios.get('http://localhost:8080/Promotion/selectAll_Promotion');
+            const response = await axios.get('http://localhost:8080/Promotion/selectAll_Promotion',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setPromotion(response.data.data);
             toast.success("Recuperation des donnees reussis");
         }catch(error){
@@ -18,7 +23,7 @@ const ListePromotion = () => {
     useEffect(() => {
         fetch();
         console.log(Promotion);
-    },[]);
+    });
     return (
         <>
             <ToastContainer />
@@ -29,7 +34,6 @@ const ListePromotion = () => {
                         <th>Filiere</th>
                         <th>Formation</th>
                         <th>Rentree</th>
-                        <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -47,9 +51,6 @@ const ListePromotion = () => {
                                         </td>
                                         <td>
                                             {P.anne_promotion}
-                                        </td>
-                                        <td className="d-flex justify-content-center align-items-center">
-                                            <button className="btn btn-info btn-block" style={{'width': '50%'}} onClick={(e) => SuppressionRole(e, rolees.id)}>detail</button>
                                         </td>
                                 </tr>
                             ) )

@@ -7,6 +7,7 @@ const ListeEtudiant = () => {
     const [Etudiant,setEtudiant] = useState('');
     const [Promotion,setPromotion] = useState('');
     const [IdPromotion,setIdPromotion] = useState('');
+    const token = localStorage.getItem("token");
     const ListeEtudiant = async (e) => {
         e.preventDefault();
         console.log(IdPromotion);
@@ -16,7 +17,8 @@ const ListeEtudiant = () => {
                 {
                     headers:
                     {
-                        'content-type': 'application/json'
+                        'content-type': 'application/json',
+                        'Authorization':`Bearer ${token}`
                     }
                 }
             );
@@ -29,7 +31,11 @@ const ListeEtudiant = () => {
     }
     const ListePromotion = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Promotion/selectAll_Promotion');
+            const response = await axios.get('http://localhost:8080/Promotion/selectAll_Promotion',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setPromotion(response.data.data);
         } catch (error) {
             console.log(error);
@@ -40,7 +46,7 @@ const ListeEtudiant = () => {
     useEffect(() => {
         ListePromotion();
         
-    },[]);
+    });
     return(
         <>
             <ToastContainer />

@@ -1,7 +1,5 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import ListeFormation from "../Formation/ListeFormation.jsx";
-import ListePromotion from "../Promotion/ListePromotion.jsx";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -9,9 +7,16 @@ const InsertionCours = () => {
     const [datedebut,setDatedebut] = useState('');
     const [listePromotion,setListePromotion] = useState('');
     const [idPromotion,setIdPromotion] = useState('');
+    const token = localStorage.getItem("token");
     const promotion = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Promotion/selectAll_Promotion');
+            const response = await axios.get('http://localhost:8080/Promotion/selectAll_Promotion',
+                {
+                    headers:{
+                        'Authorization':`Bearer ${token}`
+                    }
+                }
+            );
             setListePromotion(response.data.data);
         }catch (error){
             console.log('ERREUR DE RECUPERATION',error);
@@ -26,7 +31,8 @@ const InsertionCours = () => {
                 {
                     headers:
                         {
-                            'content-type': 'application/json'
+                            'content-type': 'application/json',
+                            'Authorization':`Bearer ${token}`
                         }
                 },
             );
@@ -42,7 +48,7 @@ const InsertionCours = () => {
     }
     useEffect(()=>{
         promotion();
-    },[])
+    },)
     return (
         <>
             <ToastContainer />

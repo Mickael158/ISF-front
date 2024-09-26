@@ -10,6 +10,7 @@ const [IdExamen,setIdExamen] = useState('');
 const [IdEtudiant,setIdEtudiant] = useState('');
 const [IdMAtiere,setMatiere] = useState('');
 const [note,setNote] = useState('');
+const token = localStorage.getItem("token");
 
 const insertionNOte = (event) => {
     event.preventDefault();
@@ -18,7 +19,8 @@ const insertionNOte = (event) => {
             {id_examen:IdExamen, id_etudiant:IdEtudiant, id_professeur_matiere:IdMAtiere, note:note},
             {
                 headers:{
-                    "Content-Type" : "application/json"
+                    "Content-Type" : "application/json",
+                    'Authorization':`Bearer ${token}`
                 }
             }
         ),
@@ -31,7 +33,11 @@ const insertionNOte = (event) => {
 
 const ListeExamen = async () => {
     try {
-        const response = await axios.get('http://localhost:8080/Examen/SelectAll_Examen');
+        const response = await axios.get('http://localhost:8080/Examen/SelectAll_Examen',{
+            headers:{
+                'Authorization':`Bearer ${token}`
+            }
+        });
         setExamen(response.data.data);
     } catch (error) {
         console.log("Erreur de recuperation d'examen :",error);
@@ -39,7 +45,11 @@ const ListeExamen = async () => {
 }
 const ListeEtudiant = async () => {
     try {
-        const response =await axios.get('http://localhost:8080/Etudiant/SelectAll_Etudiant');
+        const response =await axios.get('http://localhost:8080/Etudiant/SelectAll_Etudiant',{
+            headers:{
+                'Authorization':`Bearer ${token}`
+            }
+        });
         setEtudiant(response.data.data);
     } catch (error) {
         console.log("Erreur de recuperation d'Etudiant :",error);
@@ -47,7 +57,11 @@ const ListeEtudiant = async () => {
 }
 const LIsteMAtiere = async () => {
     try {
-        const response = await axios.get('http://localhost:8080/Professeur_matiere/SelectAll_ProfesseurMatiere');
+        const response = await axios.get('http://localhost:8080/Professeur_matiere/SelectAll_ProfesseurMatiere',{
+            headers:{
+                'Authorization':`Bearer ${token}`
+            }
+        });
         setProfesseurMatiere(response.data.data);
     } catch (error) {
         console.log("Erreur de recuperation de MAtiere :",error);
@@ -58,11 +72,11 @@ useEffect(() => {
     ListeExamen();
     ListeEtudiant();
     LIsteMAtiere();
-},[]);
+});
     return (
         <>
             <div className="w-100 mt-2 mb-2">
-                <h4 className="text-center mb-4">Attribuer les notes d'un etudiant a un examen !</h4>
+                <h4 className="text-center mb-4">Attribuer les notes d un etudiant a un examen !</h4>
                 <div className="row">
                     <form method="post" onSubmit={insertionNOte}>
                         <div className="w-100 h-100 d-flex flex-column gap-3">

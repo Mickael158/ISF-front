@@ -10,13 +10,13 @@ const Footer = () => {
                     </a>
                     <p className="m-0">L Institut de reference en Informatique</p>
                 </div>
-                <div className="col-md-8 mb-5">
+                <div className="col-md-12 mb-5">
                     <div className="row">
                         <div className="col-md-4 mb-5">
                             <h3 className="text-white mb-4">Informations</h3>
                             <p><i className="fa fa-map-marker-alt mr-2"></i>Lot IBI 22 Ampasamadinika - Antananarivo 101 Madagascar</p>
                             <p><i className="fa fa-phone mr-2"></i>034 74 966 18 / 034 60 409 50</p>
-                            <p><i className="fa fa-envelope mr-2"></i>isinfo@blueline.mg</p>
+                            <p><i className="fa fa-envelope mr-2"></i>direction@isinfo.mg / isinfo@blueline.mg</p>
                             <div className="d-flex justify-content-start mt-4">
                                 <a className="text-white mr-4" href="#"><i className="fab fa-2x fa-facebook-f"></i></a>
                                 <a className="text-white mr-4" href="#"><i className="fab fa-2x fa-whatsapp"></i></a>
@@ -48,8 +48,8 @@ const Footer = () => {
     <div className="container-fluid bg-dark text-white-50 border-top py-4" style={{"borderColor": "rgba(256, 256, 256, .1) !important"}}>
         <div className="container">
             <div className="row">
-                <div className="col-md-6 text-center text-md-left mb-3 mb-md-0">
-                    <p className="m-0">Copyright &copy; <a className="text-white" href="#">zosephatoky@gmail.com</a>
+                <div className="col-md-12 text-center text-md-left mb-3 mb-md-0">
+                    <p className="m-0">Copyright &copy; <a className="text-white" href="#">zosephatoky@gmail.com / razafindrakotomickael77@gmail.com</a>
                     </p>
                 </div>
             </div>

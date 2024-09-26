@@ -7,15 +7,17 @@ const InsertionPrixEcolage = () => {
     const [Valeur,setValeur] = useState('');
     const [Niveaux,setNIveaux] = useState('');
     const [IdNiveau,setIdNiveau] = useState('');
+    const token = localStorage.getItem("token");
     const insertion = (e) => {
         e.preventDefault();
         try{
-            const response = axios.post('http://localhost:8080/Cours/insertionPrixEcolage',
+            axios.post('http://localhost:8080/Cours/insertionPrixEcolage',
                 { valeur:Valeur, id_niveau:IdNiveau },
                 {
                     headers:
                     {
-                        'content-type': 'application/json'
+                        'content-type': 'application/json',
+                        'Authorization':`Bearer ${token}`
                     }
                 },
             );
@@ -30,7 +32,11 @@ const InsertionPrixEcolage = () => {
     }
     const ListeNIveau = async () => {
         try{
-            const response = await axios.get('http://localhost:8080/Niveaux/selectAll_Niveaux');
+            const response = await axios.get('http://localhost:8080/Niveaux/selectAll_Niveaux',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setNIveaux(response.data.data);
         }catch(error)
         {
@@ -39,7 +45,7 @@ const InsertionPrixEcolage = () => {
     }
     useEffect(()=>{
         ListeNIveau();
-    },[])
+    })
     return (
         <>
             <ToastContainer />

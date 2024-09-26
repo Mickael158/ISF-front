@@ -29,7 +29,15 @@ const Apropos = () => {
                             <i className="fa fa-envelope text-white"></i>
                         </div>
                         <div className="mt-n1">
-                            <p className="m-0">isinfo@blueline.mg</p>
+                            <p className="m-0"> <b style={{"fontWeight":"bold"}}>direction@isinfo.mg</b>   /  isinfo@blueline.mg</p>
+                        </div>
+                    </div>
+                    <div className="d-flex align-items-center">
+                        <div className="btn btn-dark mr-4">
+                        <i className="fa fa-graduation-cap text-white"></i>
+                        </div>
+                        <div className="mt-n1">
+                            <p className="m-0"> <b style={{"fontWeight":"bold"}}>Agrement n° 449- MENSR/SG/GG ENRS SRS/DEPT</b></p>
                         </div>
                     </div>
 

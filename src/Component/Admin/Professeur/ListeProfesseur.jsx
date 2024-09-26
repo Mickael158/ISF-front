@@ -5,9 +5,14 @@ import { useEffect, useState } from "react";
 
 const ListeProfesseur = () => {
     const [Professeur,setProfesseur] = useState('');
+    const token = localStorage.getItem("token");
     const Liste = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Professeur/SelectAll_Professeur');
+            const response = await axios.get('http://localhost:8080/Professeur/SelectAll_Professeur',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setProfesseur(response.data.data);
         } catch (error) {
             console.log(error);
@@ -15,7 +20,7 @@ const ListeProfesseur = () => {
     }
     useEffect(() => {
         Liste();
-    },[])
+    })
     return(
         <>
             <div className="container">

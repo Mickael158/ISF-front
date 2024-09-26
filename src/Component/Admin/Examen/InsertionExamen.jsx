@@ -10,6 +10,7 @@ const InsertionExamen = () => {
     const [IdCours,setIdCours] = useState('');
     const [Semestre,setSemestre] = useState('');
     const [idSemestre,setIdSemestre] = useState('');
+    const token = localStorage.getItem("token");
     const insertion = (e) => {
         e.preventDefault();
         try{
@@ -18,7 +19,8 @@ const InsertionExamen = () => {
                 {
                     headers:
                     {
-                        'content-type': 'application/json'
+                        'content-type': 'application/json',
+                        'Authorization':`Bearer ${token}`
                     }
                 },
             );
@@ -36,7 +38,11 @@ const InsertionExamen = () => {
 
     const ListeSemestre = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Semestre/SelectAll_Semestre');
+            const response = await axios.get('http://localhost:8080/Semestre/SelectAll_Semestre',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setSemestre(response.data.data);
         } catch (error) {
             console.log(error);
@@ -46,7 +52,11 @@ const InsertionExamen = () => {
 
     const ListeCours = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Cours/SelectAll_Cours');
+            const response = await axios.get('http://localhost:8080/Cours/SelectAll_Cours',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setCours(response.data.data);
         } catch (error) {
             console.log('Erreur de recuperation',error);
@@ -58,12 +68,12 @@ const InsertionExamen = () => {
     useEffect(()=>{
         ListeCours();
         ListeSemestre();
-    },[])
+    })
     return (
         <>
         <ToastContainer />
             <div className="w-100 mt-2 mb-2">
-                <h4 className="text-center mb-4">Planifier l'examen d'un promotion !</h4>
+                <h4 className="text-center mb-4">Planifier l examen d un promotion !</h4>
                 <div className="row">
                     <form method="post" onSubmit={insertion}>
                         <div className="h-100 d-flex flex-column gap-3">

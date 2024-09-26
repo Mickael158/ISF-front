@@ -10,15 +10,17 @@ const InsertionPromotion = () => {
     const [Formation,setFormation] = useState('');
     const [IdFormation,setIdFormation] = useState('');
     const [IdFiliere,setIdFiliere] = useState('');
+    const token = localStorage.getItem("token");
     const insertion = (e) => {
         e.preventDefault();
         try{
-            const response = axios.post('http://localhost:8080/Promotion/insertionPromotion',
+            axios.post('http://localhost:8080/Promotion/insertionPromotion',
                 { codep:CodePromotion, anne_promotion:AnnePromotion, filiere_id:IdFiliere, formation_id:IdFormation },
                 {
                     headers:
                     {
-                        'content-type': 'application/json'
+                        'content-type': 'application/json',
+                        'Authorization':`Bearer ${token}`
                     }
                 },
             );
@@ -34,7 +36,11 @@ const InsertionPromotion = () => {
     }
     const ListeFiliere = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Filiere/SelectAll_Filiere');
+            const response = await axios.get('http://localhost:8080/Filiere/SelectAll_Filiere',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setFiliere(response.data.data);
         }catch (error){
             console.log('ERREUR DE RECUPERATION',error)
@@ -42,7 +48,11 @@ const InsertionPromotion = () => {
     };
     const ListeFormation = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Formation/selectAll_Formation');
+            const response = await axios.get('http://localhost:8080/Formation/selectAll_Formation',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setFormation(response.data.data);
         }catch (error){
             console.log('ERREUR DE RECUPERATION',error)
@@ -51,7 +61,7 @@ const InsertionPromotion = () => {
     useEffect(() => {
         ListeFiliere();
         ListeFormation();
-    },[]);
+    });
     return (
         <>
             <ToastContainer />

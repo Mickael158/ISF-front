@@ -11,6 +11,7 @@ const InsertionProfesseur = () => {
     const [Email,setEmail] = useState('');
     const [Genre,setGenre] = useState('');
     const [IdGenre,setIdGenre] = useState('');
+    const token = localStorage.getItem("token");
     const insertion = (e) => {
         e.preventDefault();
         try{
@@ -19,7 +20,7 @@ const InsertionProfesseur = () => {
                 {
                     headers:
                     {
-                        'content-type': 'application/json'
+                        'content-type': 'application/json','Authorization':`Bearer ${token}`
                     }
                 },
             );
@@ -40,7 +41,11 @@ const InsertionProfesseur = () => {
     }
     const ListeGenre = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Genre/SelectAll_Genre');
+            const response = await axios.get('http://localhost:8080/Genre/SelectAll_Genre',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setGenre(response.data.data);
         } catch (error) {
             console.log('Erreur de recuperation',error);
@@ -48,7 +53,7 @@ const InsertionProfesseur = () => {
     }
     useEffect(()=>{
         ListeGenre();
-    },[])
+    })
     return (
         <>
             <ToastContainer />

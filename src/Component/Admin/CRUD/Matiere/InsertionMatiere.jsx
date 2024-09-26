@@ -6,6 +6,7 @@ import 'react-toastify/dist/ReactToastify.css';
 const InsertionMatiere = () => {
     const [NomMatiere,setNomMatiere] = useState('');
     const [Coeff,setCoeff] = useState('');
+    const token = localStorage.getItem("token");
     const insertion = (e) => {
         e.preventDefault();
         try{
@@ -14,7 +15,8 @@ const InsertionMatiere = () => {
                 {
                     headers:
                         {
-                            'content-type': 'application/json'
+                            'content-type': 'application/json',
+                            'Authorization':`Bearer ${token}`
                         }
                 },
             );

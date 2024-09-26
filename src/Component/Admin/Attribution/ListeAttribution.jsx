@@ -1,13 +1,16 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-// import { ToastContainer, toast } from "react-toastify";
-// import 'react-toastify/dist/ReactToastify.css';
 
 const ListeAttribution = () => {
     const [Professeur,setProfesseur] = useState('');
+    const token = localStorage.getItem("token");
     const Liste = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Professeur_matiere/SelectAll_ProfesseurMatiere');
+            const response = await axios.get('http://localhost:8080/Professeur_matiere/SelectAll_ProfesseurMatiere',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setProfesseur(response.data.data);
         } catch (error) {
             console.log(error);
@@ -15,7 +18,7 @@ const ListeAttribution = () => {
     }
     useEffect(() => {
         Liste();
-    },[])
+    },)
     return(
         <>
             <div className="container">

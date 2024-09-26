@@ -5,6 +5,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const InsertionFormation = () => {
     const [NomFormation,setNomFormation] = useState('');
+    const token = localStorage.getItem("token");
     const insertion = async (e) => {
         e.preventDefault();
         try{
@@ -13,7 +14,8 @@ const InsertionFormation = () => {
                 {
                     headers:
                     {
-                        'content-type': 'application/json'
+                        'content-type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     }
                 },
             );

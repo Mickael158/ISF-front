@@ -14,6 +14,7 @@ const InsertionEtudiant = () => {
     const [IdGenre,setIdGenre] = useState('');
     const [IdPromotion,setIdPromotion] = useState('');
     const [Promotion,setPromotion] = useState('');
+    const token = localStorage.getItem("token");
     const insertion = (e) => {
         e.preventDefault();
         try{
@@ -23,7 +24,8 @@ const InsertionEtudiant = () => {
                 {
                     headers:
                     {
-                        'content-type': 'application/json'
+                        'content-type': 'application/json',
+                        'Authorization':`Bearer ${token}`
                     }
                 },
             );
@@ -44,7 +46,11 @@ const InsertionEtudiant = () => {
     }
     const ListeGenre = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/Genre/SelectAll_Genre");
+            const response = await axios.get("http://localhost:8080/Genre/SelectAll_Genre",{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setGenre(response.data.data);
         } catch (error) {
             console.log("erreur de recuperation "+error);
@@ -53,7 +59,11 @@ const InsertionEtudiant = () => {
 
     const ListePromotion = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/Promotion/selectAll_Promotion");
+            const response = await axios.get("http://localhost:8080/Promotion/selectAll_Promotion",{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setPromotion(response.data.data);
         } catch (error) {
             console.log("erreur de recuperation "+error);
@@ -63,7 +73,7 @@ const InsertionEtudiant = () => {
     useEffect(() => {
         ListeGenre();
         ListePromotion();
-    },[])
+    })
     return (
         <>
             <ToastContainer />

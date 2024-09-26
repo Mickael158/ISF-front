@@ -10,6 +10,7 @@ const InsertionAttribution = () => {
     const [IdMatiere,setIdMatiere] = useState('');
     const [Cours,setCours] = useState('');
     const [IdCours,setIdCours] = useState('');
+    const token = localStorage.getItem("token");
     const insertion = (e) => {
         e.preventDefault();
         try{
@@ -19,7 +20,8 @@ const InsertionAttribution = () => {
                 {
                     headers:
                     {
-                        'content-type': 'application/json'
+                        'content-type': 'application/json',
+                        'Authorization':`Bearer ${token}`
                     }
                 },
             );
@@ -33,7 +35,11 @@ const InsertionAttribution = () => {
     }
     const ListeProfesseur = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Professeur/SelectAll_Professeur');
+            const response = await axios.get('http://localhost:8080/Professeur/SelectAll_Professeur',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setProfesseur(response.data.data);
         } catch (error) {
             console.log('Erreur de recuperation',error);
@@ -41,7 +47,11 @@ const InsertionAttribution = () => {
     }
     const ListeMatiere = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Matiere/SelectAll_Matiere');
+            const response = await axios.get('http://localhost:8080/Matiere/SelectAll_Matiere',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setMatiere(response.data.data);
         } catch (error) {
             console.log('Erreur de recuperation',error);
@@ -49,7 +59,11 @@ const InsertionAttribution = () => {
     }
     const ListeCours = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Cours/SelectAll_Cours');
+            const response = await axios.get('http://localhost:8080/Cours/SelectAll_Cours',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setCours(response.data.data);
         } catch (error) {
             console.log('Erreur de recuperation',error);
@@ -59,12 +73,12 @@ const InsertionAttribution = () => {
         ListeProfesseur();
         ListeMatiere();
         ListeCours();
-    },[])
+    },)
     return (
         <>
             <ToastContainer />
             <div className="w-100 mt-2 mb-2">
-                <h4 className="text-center mb-4">Gerer l'attribution des professeurs !</h4>
+                <h4 className="text-center mb-4">Gerer l attribution des professeurs !</h4>
                 <div className="row">
                     <form method="post" onSubmit={insertion}>
                         <div className="h-100 d-flex flex-column gap-3">

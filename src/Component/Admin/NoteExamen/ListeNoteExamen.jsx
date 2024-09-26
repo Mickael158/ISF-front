@@ -4,10 +4,15 @@ import { useEffect, useState } from "react";
 const ListeNoteExamen = () => {
     const [examen,setExamen] = useState('');
     const [cours,setCours] = useState('');
+    const token = localStorage.getItem("token");
 
     const ListeExamen = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Examen/SelectAll_Examen');
+            const response = await axios.get('http://localhost:8080/Examen/SelectAll_Examen',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setExamen(response.data.data);
         } catch (error) {
             console.log("Erreur de recuperation d'examen :",error);
@@ -16,7 +21,11 @@ const ListeNoteExamen = () => {
 
     const ListeCours = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/Cours/SelectAll_Cours');
+            const response = await axios.get('http://localhost:8080/Cours/SelectAll_Cours',{
+                headers:{
+                    'Authorization':`Bearer ${token}`
+                }
+            });
             setCours(response.data.data);
         } catch (error) {
             console.log("Erreur de recuperation d'examen :",error);
@@ -25,7 +34,7 @@ const ListeNoteExamen = () => {
 
     useEffect(() => {
         ListeExamen();
-    },[])
+    })
     return(
         <>
             <div className="row">

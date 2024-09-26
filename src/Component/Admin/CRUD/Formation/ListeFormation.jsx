@@ -30,7 +30,8 @@ const ListeFormation = () => {
                 {
                     headers:
                         {
-                            'content-type': 'application/json'
+                            'content-type': 'application/json',
+                            'Authorization':`Bearer ${token}`
                         }
                 },
             );
@@ -43,7 +44,7 @@ const ListeFormation = () => {
     };
     useEffect(() => {
         fetch();
-    },[]);
+    });
     return (
         <>
             <ToastContainer />

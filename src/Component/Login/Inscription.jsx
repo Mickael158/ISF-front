@@ -98,7 +98,7 @@ const Inscription = () => {
                                     <input type="password" className="form-control" onChange={(e) => setConfPassword(e.target.value)} style={{"height":"40px"}} value={confpassword} required/>
                                 </div>
                                 <div className="text-center">
-                                    <button type="submit" className="btn bg-gradient-info w-100">S'inscrire</button>
+                                    <button type="submit" className="btn bg-gradient-info w-100">S inscrire</button>
                                     <a href="/login" className="text-info">Se connecter?</a>
                                 </div>
                             </form>

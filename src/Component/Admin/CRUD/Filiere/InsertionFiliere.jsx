@@ -6,15 +6,17 @@ import 'react-toastify/dist/ReactToastify.css';
 const InsertionFiliere = () => {
     const [NomFiliere,setNomFiliere] = useState('');
     const [CodeFiliere,setCodeFiliere] = useState('');
+    const token = localStorage.getItem("token");
     const insertion = (e) => {
         e.preventDefault();
         try{
-            const response = axios.post('http://localhost:8080/Filiere/insertionFiliere',
+             axios.post('http://localhost:8080/Filiere/insertionFiliere',
                 { filiere:NomFiliere, codef:CodeFiliere },
                 {
                     headers:
                     {
-                        'content-type': 'application/json'
+                        'content-type': 'application/json',
+                        'Authorization': `Bearer ${token}`
                     }
                 },
             );
