@@ -5,9 +5,17 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const ListeFormation = () => {
     const [Formation,setFormation] = useState('');
+    const token = localStorage.getItem("token");
+    console.log(token);
     const fetch = async () => {
         try{
-            const response = await axios.get('http://localhost:8080/Formation/selectAll_Formation');
+            const response = await axios.get('http://localhost:8080/Formation/selectAll_Formation',
+                {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                }
+            );
 
             setFormation(response.data.data);
         }catch(error){
@@ -18,7 +26,7 @@ const ListeFormation = () => {
     const suppressionFormation = async (event,id) => {
         event.preventDefault();
         try{
-            const response = await axios.post('http://localhost:8080/Formation/Delete_Formation',{id_formation:id},
+            await axios.post('http://localhost:8080/Formation/Delete_Formation',{id_formation:id},
                 {
                     headers:
                         {

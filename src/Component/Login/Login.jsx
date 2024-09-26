@@ -42,7 +42,6 @@ const Login = () => {
             if(authentifier){
                 const token = authentifier;
                 localStorage.setItem("token",token);
-                localStorage.setItem("user",authentifier.id_personne.prenom);
                 navigate('/Admin');
             }
         }catch(error){
