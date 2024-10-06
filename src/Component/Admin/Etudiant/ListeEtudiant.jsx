@@ -23,6 +23,7 @@ const ListeEtudiant = () => {
                 }
             );
             setEtudiant(response.data.data);
+            console.log(response.data.data);
             toast.success('Liste des etudiants recuperer !');
         } catch (error) {
             console.log(error);

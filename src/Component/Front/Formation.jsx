@@ -15,7 +15,7 @@ const Formation = () => {
                     <div className="card-body d-flex align-items-center justify-content-center text-center" style={{"columnGap": "30px !important"}}>
                       <div style={{"display": "flex","flexDirection": "column","rowGap": "5px"}}>
                         <h5 className="card-subtitle mb-2 text-muted font-weight-bold">Formation Initiale (FI)</h5>
-                        <h6 className="card-subtitle mb-2 text-muted font-weight-bold">Qui est une formation qui se deroule du Lundi au Vendredi</h6>
+                        <h6 className="card-subtitle mb-2 text-muted font-weight-bold">Qui est une formation qui se déroule du Lundi au Vendredi</h6>
                       </div>
                     </div>
                   </div>

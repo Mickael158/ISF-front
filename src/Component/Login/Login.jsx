@@ -85,6 +85,12 @@ const Login = () => {
                                     <a href="/inscription" className="text-info">Creer un compte?</a>
                                 </div>
                             </form>
+                            <div className="text-center mt-1">
+                                <a href="/" className="btn btn-link text-secondary font-weight-bold">
+                                <i className="fas fa-arrow-left me-2"></i>
+                                Retour à l'accueil
+                                </a>
+                            </div>
                         </div>
                     </div>
                     </div>

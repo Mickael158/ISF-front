@@ -7,6 +7,7 @@ import Diplome from '../Front/Diplome';
 import Formation from '../Front/Formation';
 import Contact from '../Front/Contact';
 import Footer from '../Front/Footer';
+import Evenement from '../Front/Evenement';
 
 const Acceuil = () => {
     return (
@@ -21,6 +22,9 @@ const Acceuil = () => {
             <Formation />
             <div className="row justify-content-center bg-image mx-0 mb-5">
                 <Contact />
+            </div>
+            <div className="row justify-content-center bg-image mx-0 mb-5">
+                <Evenement />
             </div>
         </div>
         <Footer />

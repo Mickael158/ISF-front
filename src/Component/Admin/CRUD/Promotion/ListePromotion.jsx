@@ -14,7 +14,6 @@ const ListePromotion = () => {
                 }
             });
             setPromotion(response.data.data);
-            toast.success("Recuperation des donnees reussis");
         }catch(error){
             toast.error("Erreur de recuperation des donnees");
             console.log("erreur : ",error);
@@ -54,7 +53,7 @@ const ListePromotion = () => {
                                         </td>
                                 </tr>
                             ) )
-                        ) : ( <tr><td>Null</td></tr>) }
+                        ) : ( <tr><td>Aucune valeur trouver!</td></tr>) }
                 </tbody>
             </table>
         </>

@@ -4,6 +4,7 @@ import Acceuil from '../Acceuil/Acceuil';
 import Dashboard from '../Admin/Dashboard/dashbord';
 import Inscription from '../Login/Inscription';
 import PrivateRoute from './PrivateRoute';
+import Text from './../Text';
 import { useEffect } from 'react';
 
 const Root = () => {
@@ -29,6 +30,7 @@ const Root = () => {
                 <Route path="/Login" element={<Login />} />
                 <Route path="/Inscription" element={<Inscription />} />
                 <Route path="/" element={<Acceuil />} />
+                <Route path="/teste" element={<Text />} />
                 <Route path="/Admin" element={
                     <PrivateRoute>   
                         <Dashboard />

@@ -40,19 +40,22 @@ const Navbar = () => {
                                 Acceuil
                             </a>
                             <a href="#apropos" className="nav-item nav-link" style={{ fontSize: '17px' }} onClick={closeNavbar}>
-                                Apropos
+                                A propos
                             </a>
                             <a href="#filiere" className="nav-item nav-link" style={{ fontSize: '17px' }} onClick={closeNavbar}>
-                                Filiere
+                                Filière
                             </a>
                             <a href="#diplome" className="nav-item nav-link" style={{ fontSize: '17px' }} onClick={closeNavbar}>
-                                Diplome
+                                Diplôme
                             </a>
                             <a href="#formation" className="nav-item nav-link" style={{ fontSize: '17px' }} onClick={closeNavbar}>
                                 Formations
                             </a>
                             <a href="#contact" className="nav-item nav-link" style={{ fontSize: '17px' }} onClick={closeNavbar}>
                                 Contact
+                            </a>
+                            <a href="#evenement" className="nav-item nav-link" style={{ fontSize: '17px' }} onClick={closeNavbar}>
+                                Evènement
                             </a>
                         </div>
                         <a href="/Login" className="btn btn-info" onClick={closeNavbar}>Se connecter</a>

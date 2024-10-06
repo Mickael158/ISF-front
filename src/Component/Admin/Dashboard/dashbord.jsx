@@ -9,6 +9,8 @@ import Examen from "../Examen/Examen.jsx";
 import NoteExamen from "../NoteExamen/NoteExamen.jsx";
 import InsertionReponsable from "../Reponsable/InsertionResponsable.jsx";
 import logo from "../../../../public/Image/logo.jpeg";
+import Institut from "../Institut/Institut.jsx";
+import Evenement from "../Evenement/Evenement.jsx";
 
 
 const Dashbord = () => {
@@ -24,7 +26,7 @@ const Dashbord = () => {
 
   const handlePageChange = (index) => {
     setPage(index);
-    setActiveIndex(index); // Mettre à jour l'élément actif
+    setActiveIndex(index); 
   }
 
   return (
@@ -43,6 +45,20 @@ const Dashbord = () => {
             <a href="#">
               <i className="now-ui-icons design_app"></i>
               <p>Tableau de bord</p>
+            </a>
+          </li>
+          <li className={activeIndex === 8 ? "active" : ""}
+            onClick={() => handlePageChange(8)}>
+            <a href="#">
+              <i className="now-ui-icons education_atom"></i>
+              <p>Institut</p>
+            </a>
+          </li>
+          <li className={activeIndex === 9 ? "active" : ""}
+            onClick={() => handlePageChange(9)}>
+            <a href="#">
+              <i className="now-ui-icons education_atom"></i>
+              <p>Evenement</p>
             </a>
           </li>
           <li className={activeIndex === 2 ? "active" : ""}
@@ -113,6 +129,8 @@ const Dashbord = () => {
         {page === 5 && <Examen />}
         {page === 6 && <NoteExamen />}
         {page === 7 && <InsertionReponsable />}
+        {page === 8 && <Institut />}
+        {page === 9 && <Evenement />}
       </div>
     </div>
     

@@ -18,8 +18,7 @@ const InsertionEtudiant = () => {
     const insertion = (e) => {
         e.preventDefault();
         try{
-            console.log(IdPromotion,IdGenre,Matricule,Telephone,Prenom,Nom);
-            const response = axios.post('http://localhost:8080/Etudiant/insertionEtudiant',
+            axios.post('http://localhost:8080/Etudiant/insertionEtudiant',
                 { nom:Nom, prenom:Prenom, telephone:Telephone, matricule:Matricule, promotion_id:IdPromotion,id_genre:IdGenre,adresse:Adresse,email:Email },
                 {
                     headers:
@@ -29,7 +28,6 @@ const InsertionEtudiant = () => {
                     }
                 },
             );
-            console.log('Inserer',response.data);
             toast.success("Etudiant inscrit avec success!");
             setNom('');
             setPrenom('');

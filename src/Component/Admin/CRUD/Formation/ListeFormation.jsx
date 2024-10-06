@@ -6,7 +6,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const ListeFormation = () => {
     const [Formation,setFormation] = useState('');
     const token = localStorage.getItem("token");
-    console.log(token);
     const fetch = async () => {
         try{
             const response = await axios.get('http://localhost:8080/Formation/selectAll_Formation',
@@ -16,7 +15,6 @@ const ListeFormation = () => {
                     }
                 }
             );
-
             setFormation(response.data.data);
         }catch(error){
             toast.error("Recuperation des donnee echouer!");
@@ -52,6 +50,7 @@ const ListeFormation = () => {
                 <thead>
                     <tr className="text-center">
                         <th>Formation</th>
+                        <th>Code Formation</th>
                         <th>Supprimer</th>
                     </tr>
                 </thead>
@@ -61,6 +60,9 @@ const ListeFormation = () => {
                            <tr key={F.id_formation} className="text-center">
                                <td>
                                    {F.nom_formation}
+                               </td>
+                               <td>
+                                   {F.codeF}
                                </td>
                                <td className="d-flex justify-content-center align-items-center">
                                    <button className="btn btn-danger btn-block d-flex align-items-center justify-content-center" style={{'width': '50px'}} onClick={(event) => suppressionFormation(event, F.id_formation)} ><i className="now-ui-icons shopping_basket"></i></button>

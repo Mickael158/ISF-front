@@ -1,11 +1,76 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Carousel } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 const Header = () => {
+    const [instituts, setInstituts] = useState([]);
+
+    const selectInstitut = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/Institut/SelectAll_Intitut');
+            console.log(response.data.data);
+            setInstituts(response.data.data);
+        } catch (error) {
+            console.error("Erreur lors de la récupération des instituts:", error);
+        }
+    };
+
+    useEffect(() => {
+        selectInstitut();
+    }, []);
+
+    // Chemins des images avec descriptions associées
+    const images = [
+        {
+            url: "/Image/ISINFO-326-2048x1365.jpg",
+            description: "Nous sommes un institut spécialisé dans le domaine de l'informatique"
+        },
+        {
+            url: "/Image/P1380834-2048x1536.jpg",
+            description: "Nous offrons divers type de formation adapter a toute personnes"
+        },
+        {
+            url: "/Image/ISINFO-150-2048x1365.jpg",
+            description: "Pour plus de détail veuillez nous contacter",
+            telephone: "034 74 966 18 / 034 60 409 50"
+        }
+    ];
+
     return (
-        <div className="jumbotron jumbotron-fluid position-relative overlay-bottom" style={{"marginBottom": "10px"}}>
-            <div className="container text-center my-5 py-5">
-                <h2 className="text-white mt-4 mb-4">IS-INFO (Institut Superieur d Informatique)</h2>
-                <h3 className="text-white mb-5">L Institut de reference en Informatique</h3>
-            </div>
-        </div>
-    )
-}
+        <Carousel>
+            {images.map((image, index) => (
+                <Carousel.Item key={index}>
+                    <div className="position-relative">
+                        <img 
+                            className="d-block w-100" 
+                            src={image.url} 
+                            alt={`Image ${index + 1}`} 
+                            style={{ height: '80vh', objectFit: 'cover' }} 
+                        />
+                        <div 
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                backgroundColor: 'rgba(2, 16, 23, 0.6)',
+                                zIndex: 1 
+                            }}
+                        />
+                        <div className="container position-absolute text-center my-5 py-5" style={{ top: "17%", zIndex: 2, left: '15%' }}>
+                        <h2 className="text-white mt-4 mb-4 fs-1" style={{ textShadow: '2px 2px 4px rgba(0, 0, 0, 0.7)' }}>
+                                {instituts.length > 0 ? instituts[0].nomInstitut : "Chargement..."}
+                            </h2>
+                            <h3 className="text-white mb-5" style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.7)' }}>{image.description}</h3>
+                            <h5 className="text-white mb-5" style={{ textShadow: '1px 1px 3px rgba(0, 0, 0, 0.7)' }}>{image.telephone}</h5>
+                        </div>
+                    </div>
+                </Carousel.Item>
+            ))}
+        </Carousel>
+    );
+};
+
 export default Header;

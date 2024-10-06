@@ -95,7 +95,7 @@ const InsertionPromotion = () => {
                                     {Array.isArray(Formation) ? (
                                         Formation.map((f) => (
                                             <option className="form-control" key={f.id_formation} value={f.id_formation}>
-                                                {f.nom_formation}
+                                                {f.codeF}
                                             </option>
                                         ))
                                     ) : (
